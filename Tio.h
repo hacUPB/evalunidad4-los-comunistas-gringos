@@ -12,6 +12,6 @@ typedef struct Tio
 
 void Tio_Ctor(char* nombre, int* saldo);
 void Tio_Dtor(Tio *);
-void Ingresar_Dinero(int cantidad);
+int Ingresar_Dinero(int cantidad);
 
 #endif

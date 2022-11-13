@@ -11,6 +11,6 @@ typedef struct Primo
 
 void Primo_Ctor(char *);
 void Primo_Dtor(Primo *);
-void Retirar_Dinero(int cantidad);
+int Retirar_Dinero(int cantidad);
 
 #endif
