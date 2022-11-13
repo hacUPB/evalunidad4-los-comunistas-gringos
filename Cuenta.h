@@ -8,7 +8,7 @@ typedef struct Cuenta
     int Disponible;
 } Cuenta;
 
-
+Cuenta *newcuenta();
 void Cuenta_Ctor(int inicial);
 void Cuenta_Dtor(Cuenta *);
 void Funcionando();
