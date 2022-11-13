@@ -8,7 +8,7 @@ typedef struct Primo
     char Nombre;
 } Primo;
 
-
+Primo *newprimo();
 void Primo_Ctor(char *);
 void Primo_Dtor(Primo *);
 int Retirar_Dinero(int cantidad);
