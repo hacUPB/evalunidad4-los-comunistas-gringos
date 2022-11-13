@@ -15,7 +15,7 @@ Tio* newTio()
 
 int Ingresar_Dinero(int *cantidad)
 {
-    //disponible _ restatar
+    //disponible _ sumar
     /*int i, n;
     time_t t; 
 
