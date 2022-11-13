@@ -7,5 +7,4 @@ Primo* newPrimo()
     return(Primo*)malloc(sizeof(Primo));
 }
 
-int 
 
