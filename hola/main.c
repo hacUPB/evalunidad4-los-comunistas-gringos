@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <string.h>
 
-int disponible = 400;
+int disponible = 2000;
 pthread_mutex_t locked;
 
 char * carlos, juan;
@@ -13,21 +13,22 @@ juan = "Juan";
 
 
 void* mover_dinero(char* persona){
-    //for(cantidad de transacciones que vayamos a simular)
+    for(int i = 0; i < 100; i++)
+
     pthread_mutex_lock(&locked);
 
     int movimiento = rand()%101;
 
     if(strcmp(persona, carlos) || strcmp(persona, juan))
     {
-        if(disponible <700)
+        if(disponible <5000)
         {
             disponible += movimiento;
-            print("Persona ha retirado movimiento de la cuenta");
+            printf("Persona ha retirado movimiento de la cuenta");
         }
         else
         {
-            print("No hay dinero para realizar el retiro");
+            printf("No hay dinero para realizar el retiro");
         }
     }
     else
@@ -35,11 +36,11 @@ void* mover_dinero(char* persona){
         if(disponible>movimiento)
         {
             disponible -= movimiento;
-            print("Persona ha consignado movimiento a la cuenta");
+            printf("Persona ha consignado movimiento a la cuenta");
         }
         else
         {
-            print("La cuenta ha alcanzado su tope, no se pudo realizar el depósito");
+            printf("La cuenta ha alcanzado su tope, no se pudo realizar el depósito");
         }
     }
     pthread_mutex_unlock(&locked);
@@ -50,7 +51,7 @@ void* mover_dinero(char* persona){
 int main(int argc, char argv[])
 {
 
-    Print("Simulacion de una cuenta familiar durante X cantidad de transacciones");
+    printf("Simulacion de una cuenta familiar durante X cantidad de transacciones");
 
     if(pthread_mutex_init(&locked, NULL) != 0)
     {
@@ -69,7 +70,7 @@ int main(int argc, char argv[])
     pthread_join(id3, NULL);
     pthread_join(id4, NULL);
 
-    //Print("Simulación finalizada")
+    printf("Simulación finalizada")
 
     exit(0);
 
