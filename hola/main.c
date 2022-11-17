@@ -7,45 +7,54 @@
 int disponible = 2000;
 pthread_mutex_t locked;
 
-char * carlos, juan;
-carlos = "Carlos";
-juan = "Juan";
+char tio1[] = "Carlos";
+char tio2[] = "Julian";
+
+char primo1[] = "Santiago";
+char primo2[] = "Alejandro";
 
 
-void* mover_dinero(char* persona){
-    for(int i = 0; i < 100; i++)
+void* mover_dinero(char* tio[]){
+  for(int i = 0; i<100; i++){
+          pthread_mutex_lock(&locked);
+        int movimiento = rand()%1000;
+    
 
-    pthread_mutex_lock(&locked);
-
-    int movimiento = rand()%101;
-
-    if(strcmp(persona, carlos) || strcmp(persona, juan))
-    {
-        if(disponible <5000)
+    
+        if(disponible >10000)
         {
-            disponible += movimiento;
-            printf("Persona ha retirado movimiento de la cuenta");
+           printf("papi ya no aguanto mas platica")
         }
         else
         {
-            printf("No hay dinero para realizar el retiro");
+             disponible += movimiento;
+            printf("tio ha ingresado dinero a la cuenta %i\n"movimiento);
         }
+    
+   
+   
+        pthread_mutex_unlock(&locked);
+
+    }//se cierra el for
+} 
+void* sacar_dinero(char* primo[]){
+    for(int i = 0; i<100; i++){
+          pthread_mutex_lock(&locked);
+        int movimiento = rand()%1000;
+    
+
+    if(disponible>5000){
+
+         disponible -= movimiento;
+        printf("Primo ha retirado dinero de la cuenta %i\n"movimiento);
     }
-    else
-    {
-        if(disponible>movimiento)
-        {
-            disponible -= movimiento;
-            printf("Persona ha consignado movimiento a la cuenta");
-        }
-        else
-        {
-            printf("La cuenta ha alcanzado su tope, no se pudo realizar el depósito");
-        }
+    else{
+        printf("ya no hay mas platica");
     }
+
+
     pthread_mutex_unlock(&locked);
-
-    //se cierra el for
+    }
 }
 
 int main(int argc, char argv[])
@@ -59,16 +68,16 @@ int main(int argc, char argv[])
         exit(1);
     }
 
-    pthread_t id1, id2, id3, id4;
-    pthread_create(&id1, NULL, mover_dinero, "Juan");
-    pthread_create(&id2, NULL, mover_dinero, "Carlos");
-    pthread_create(&id3, NULL, mover_dinero, "Sebastián");
-    pthread_create(&id4, NULL, mover_dinero, "Alejandro");
+    pthread_t id[1], id[2], id[3], id[4];
+    pthread_create(&id[1], NULL, mover_dinero, tio1);
+    pthread_create(&id[2], NULL, mover_dinero, tio2);
+    pthread_create(&id[3], NULL, sacar_dinero, primo1);
+    pthread_create(&id[4], NULL, sacar_dinero, primo2);
 
-    pthread_join(id1, NULL);
-    pthread_join(id2, NULL);
-    pthread_join(id3, NULL);
-    pthread_join(id4, NULL);
+    pthread_join(id[1], NULL);
+    pthread_join(id[2], NULL);
+    pthread_join(id[3], NULL);
+    pthread_join(id[4], NULL);
 
     printf("Simulación finalizada")
 
